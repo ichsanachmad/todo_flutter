@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:todo_flutter/constant/firebase_constant.dart';
-import 'package:todo_flutter/data/model/todo.dart';
+import 'package:todo_flutter/data/model/models.dart';
 
 class ToDoNetwork {
   final _toDoCollection =

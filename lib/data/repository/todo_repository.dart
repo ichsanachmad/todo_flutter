@@ -1,4 +1,4 @@
-import 'package:todo_flutter/data/model/todo.dart';
+import 'package:todo_flutter/data/model/models.dart';
 
 abstract class ToDoRepository {
   Stream<List<ToDo>> getToDoList();

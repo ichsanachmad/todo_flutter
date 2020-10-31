@@ -1,6 +1,6 @@
-import 'package:todo_flutter/data/model/todo.dart';
+import 'package:todo_flutter/data/model/models.dart';
 import 'package:todo_flutter/data/network/todo_network.dart';
-import 'package:todo_flutter/data/repository/todo_repository.dart';
+import 'package:todo_flutter/data/repository/repositories.dart';
 
 class ToDoRepositoryImpl implements ToDoRepository {
   final _toDoNetwork = ToDoNetwork();

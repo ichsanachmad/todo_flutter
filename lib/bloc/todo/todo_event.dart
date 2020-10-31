@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:todo_flutter/data/model/todo.dart';
+import 'package:todo_flutter/data/model/models.dart';
 
 class ToDoEvent extends Equatable {
   @override

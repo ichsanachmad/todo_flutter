@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:todo_flutter/bloc/todo/todo_bloc.dart';
-import 'package:todo_flutter/bloc/todo/todo_event.dart';
-import 'package:todo_flutter/bloc/todo/todo_state.dart';
-import 'package:todo_flutter/data/model/todo.dart';
+import 'package:todo_flutter/bloc/blocs.dart';
+import 'package:todo_flutter/data/model/models.dart';
 import 'package:todo_flutter/ui/insert_todo.dart';
 import 'package:todo_flutter/widgets/list_item_todo.dart';
 import 'package:todo_flutter/widgets/widget_background_home.dart';
