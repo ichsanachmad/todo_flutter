@@ -31,4 +31,13 @@ class ToDoRepositoryImpl implements ToDoRepository {
       throw Exception(e.toString());
     }
   }
+
+  @override
+  Future<void> deleteToDo(String id) {
+      try {
+      return _toDoNetwork.deleteToDo(id);
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

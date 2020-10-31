@@ -17,8 +17,8 @@ class ToDoEventUpdateToDoList extends ToDoEvent {
   List<Object> get props => [toDos];
 }
 
-class ToDoEventInsertToDoAction extends ToDoEvent{
- final ToDo toDo;
+class ToDoEventInsertToDoAction extends ToDoEvent {
+  final ToDo toDo;
 
   ToDoEventInsertToDoAction(this.toDo);
 
@@ -26,11 +26,20 @@ class ToDoEventInsertToDoAction extends ToDoEvent{
   List<Object> get props => [toDo];
 }
 
-class ToDoEventUpdateToDoAction extends ToDoEvent{
- final ToDo toDo;
+class ToDoEventUpdateToDoAction extends ToDoEvent {
+  final ToDo toDo;
 
   ToDoEventUpdateToDoAction(this.toDo);
 
   @override
   List<Object> get props => [toDo];
+}
+
+class ToDoEventDeleteToDoAction extends ToDoEvent {
+  final String id;
+
+  ToDoEventDeleteToDoAction(this.id);
+
+  @override
+  List<Object> get props => [id];
 }

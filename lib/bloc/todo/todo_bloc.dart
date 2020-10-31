@@ -16,39 +16,56 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   Stream<ToDoState> mapEventToState(ToDoEvent event) async* {
     if (event is ToDoEventLoadToDoList) {
       yield ToDoLoadingState();
-      yield* _loadToDoList();
+      _loadToDoList();
     } else if (event is ToDoEventUpdateToDoList) {
       yield ToDoSuccessLoadState(event.toDos);
     } else if (event is ToDoEventInsertToDoAction) {
       yield ToDoLoadingState();
-      yield* _insertToDo(event.toDo);
+      yield _insertToDo(event.toDo);
     } else if (event is ToDoEventUpdateToDoAction) {
-      yield* _updateToDo(event.toDo);
+      yield _updateToDo(event.toDo);
+    } else if (event is ToDoEventDeleteToDoAction) {
+      yield _deleteToDo(event.id);
     }
   }
 
-  Stream<ToDoState> _loadToDoList() async* {
+  void _loadToDoList() {
     _toDoSubscription?.cancel();
     _toDoSubscription = _toDoRepository.getToDoList().listen((event) {
       add(ToDoEventUpdateToDoList(event));
     });
   }
 
-  Stream<ToDoState> _insertToDo(ToDo toDo) async* {
+  ToDoState _insertToDo(ToDo toDo) {
     try {
       _toDoRepository.insertToDo(toDo);
-      yield ToDoActionSuccessState();
-    } catch (e) {
-      yield ToDoActionFailedState();
+      return ToDoActionSuccessState();
+    } catch (_) {
+      return ToDoActionFailedState();
     }
   }
 
-  Stream<ToDoState> _updateToDo(ToDo toDo) async* {
+  ToDoState _updateToDo(ToDo toDo) {
     try {
       _toDoRepository.updateToDo(toDo);
-      yield ToDoActionSuccessState();
-    } catch (e) {
-      yield ToDoActionFailedState();
+      return ToDoActionSuccessState();
+    } catch (_) {
+      return ToDoActionFailedState();
     }
+  }
+
+  ToDoState _deleteToDo(String id) {
+    try {
+      _toDoRepository..deleteToDo(id);
+      return ToDoActionSuccessState();
+    } catch (_) {
+      return ToDoActionFailedState();
+    }
+  }
+
+  @override
+  Future<void> close() {
+    _toDoSubscription?.cancel();
+    return super.close();
   }
 }

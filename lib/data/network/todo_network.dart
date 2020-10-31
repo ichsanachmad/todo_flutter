@@ -21,4 +21,8 @@ class ToDoNetwork {
     toDo.isComplete = !toDo.isComplete;
     return _toDoCollection.doc(toDo.id).update(toDo.toDocument());
   }
+
+  Future<void> deleteToDo(String id) {
+    return _toDoCollection.doc(id).delete();
+  }
 }

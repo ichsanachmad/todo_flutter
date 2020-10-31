@@ -59,7 +59,7 @@ class HomeToDoListState extends State<HomeToDoList> {
           } else if (state is ToDoSuccessLoadState) {
             print("on success load");
           } else if (state is ToDoActionSuccessState) {
-            // context.bloc<ToDoBloc>().add(ToDoEventLoadToDoList());
+            print("on success action");
           } else if (state is ToDoActionFailedState) {
             print("on failed action");
           } else if (state is ToDoInitialState) {
@@ -93,13 +93,26 @@ class _ToDoListComponentState extends State<ToDoListComponent> {
                 listToDo = state.toDos;
               }
               return ListView.builder(
-                    addAutomaticKeepAlives: true,
-                    itemCount: listToDo.length,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return ListItemToDo(toDo: listToDo[index]);
-                    });
+                  itemCount: listToDo.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    return Dismissible(
+                        key: Key(listToDo[index].id),
+                        onDismissed: (_) {
+                          context.bloc<ToDoBloc>().add(
+                              ToDoEventDeleteToDoAction(listToDo[index].id));
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                "To Do ${listToDo[index].subject} Deleted"),
+                          ));
+
+                          setState(() {
+                            listToDo.removeAt(index);
+                          });
+                        },
+                        child: ListItemToDo(toDo: listToDo[index]));
+                  });
             },
           ),
         ]));
