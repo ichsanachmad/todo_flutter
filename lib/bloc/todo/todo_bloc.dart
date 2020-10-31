@@ -46,6 +46,7 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   Stream<ToDoState> _updateToDo(ToDo toDo) async* {
     try {
       _toDoRepository.updateToDo(toDo);
+      yield ToDoActionSuccessState();
     } catch (e) {
       yield ToDoActionFailedState();
     }

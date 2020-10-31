@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/bloc/todo/todo_bloc.dart';
 import 'package:todo_flutter/bloc/todo/todo_event.dart';
 import 'package:todo_flutter/bloc/todo/todo_state.dart';
+import 'package:todo_flutter/data/model/todo.dart';
 import 'package:todo_flutter/ui/insert_todo.dart';
 import 'package:todo_flutter/widgets/list_item_todo.dart';
 import 'package:todo_flutter/widgets/widget_background_home.dart';
@@ -75,6 +76,7 @@ class ToDoListComponent extends StatefulWidget {
 }
 
 class _ToDoListComponentState extends State<ToDoListComponent> {
+  List<ToDo> listToDo = [];
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -88,17 +90,16 @@ class _ToDoListComponentState extends State<ToDoListComponent> {
           BlocBuilder<ToDoBloc, ToDoState>(
             builder: (_, state) {
               if (state is ToDoSuccessLoadState) {
-                return ListView.builder(
+                listToDo = state.toDos;
+              }
+              return ListView.builder(
                     addAutomaticKeepAlives: true,
-                    itemCount: state.toDos.length,
+                    itemCount: listToDo.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return ListItemToDo(toDo: state.toDos[index]);
+                      return ListItemToDo(toDo: listToDo[index]);
                     });
-              } else {
-                return Container();
-              }
             },
           ),
         ]));
