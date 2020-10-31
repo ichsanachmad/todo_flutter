@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/bloc/blocs.dart';
 import 'package:todo_flutter/data/model/models.dart';
-import 'package:todo_flutter/ui/insert_todo.dart';
-import 'package:todo_flutter/widgets/list_item_todo.dart';
-import 'package:todo_flutter/widgets/widget_background_home.dart';
+import 'package:todo_flutter/ui/ui.dart';
+import 'package:todo_flutter/widgets/widgets.dart';
 
 class Home extends StatelessWidget {
   static const ROUTE = '/';
