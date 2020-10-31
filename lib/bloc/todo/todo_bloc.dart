@@ -14,13 +14,13 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
 
   @override
   Stream<ToDoState> mapEventToState(ToDoEvent event) async* {
-    yield ToDoLoadingState();
-
     if (event is ToDoEventLoadToDoList) {
+      yield ToDoLoadingState();
       yield* _loadToDoList();
     } else if (event is ToDoEventUpdateToDoList) {
       yield ToDoSuccessLoadState(event.toDos);
     } else if (event is ToDoEventInsertToDoAction) {
+      yield ToDoLoadingState();
       yield* _insertToDo(event.toDo);
     } else if (event is ToDoEventUpdateToDoAction) {
       yield* _updateToDo(event.toDo);
@@ -46,7 +46,6 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
   Stream<ToDoState> _updateToDo(ToDo toDo) async* {
     try {
       _toDoRepository.updateToDo(toDo);
-      yield ToDoActionSuccessState();
     } catch (e) {
       yield ToDoActionFailedState();
     }

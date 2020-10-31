@@ -21,7 +21,6 @@ class Home extends StatelessWidget {
 class HomeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    context.bloc<ToDoBloc>().add(ToDoEventLoadToDoList());
     return Scaffold(
       backgroundColor: Color(0xFFFBE4D4),
       body: Stack(
@@ -46,6 +45,7 @@ class HomeToDoList extends StatefulWidget {
 class HomeToDoListState extends State<HomeToDoList> {
   @override
   void initState() {
+    context.bloc<ToDoBloc>().add(ToDoEventLoadToDoList());
     super.initState();
   }
 
@@ -58,7 +58,7 @@ class HomeToDoListState extends State<HomeToDoList> {
           } else if (state is ToDoSuccessLoadState) {
             print("on success load");
           } else if (state is ToDoActionSuccessState) {
-            print("on success action");
+            // context.bloc<ToDoBloc>().add(ToDoEventLoadToDoList());
           } else if (state is ToDoActionFailedState) {
             print("on failed action");
           } else if (state is ToDoInitialState) {
@@ -91,7 +91,6 @@ class _ToDoListComponentState extends State<ToDoListComponent> {
                 return ListView.builder(
                     addAutomaticKeepAlives: true,
                     itemCount: state.toDos.length,
-                    cacheExtent: 10000.0 * state.toDos.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
