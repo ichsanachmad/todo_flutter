@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_flutter/observer/app_bloc_observer.dart';
 import 'package:todo_flutter/routes/routes.dart';
-import 'package:todo_flutter/ui/home.dart';
+import 'package:todo_flutter/ui/ui.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
